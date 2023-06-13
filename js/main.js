@@ -1,31 +1,42 @@
-'use strict'
+'use strict';
 
 const btn = document.querySelector('.js_btn');
 const select = document.querySelector('.js_select');
-const menssage = document.querySelector('.js_mensage');
-const balance = document.querySelector('.js_balance');
-const number = document.querySelector('.js_number')
-const randomNumber = getRandomNumber(6)
+const messageElement = document.querySelector('.js_message');
+const numberBetInput = document.querySelector('.js_numberBet');
+const userBalance = document.querySelector('.js_balance');
+let balance = 50;
 
-
-
-function handleClickBtn (event){
-    event.preventDefault();
-    
-    if (parseInt(select.value) === randomNumber) {
-        message.innerHML =  'Has ganado el doble de lo apostado';
-        }else {
-        message.innerHTML = 'Has perdido lo apostado';
-        }
-    console.log('handleClickBtn');
-}
-
-
+//FUNCIONES
 function getRandomNumber(max) {
- return Math.ceil(Math.random() * max);
+  return Math.ceil(Math.random() * max);
 }
- console.log('getRandomNumber');
 
+const addBetNumber = () => {
+  const betNumber = parseInt(numberBetInput.value);
+  balance = balance + betNumber * 2;
+  userBalance.innerHTML = balance;
+};
 
-btn.addEventListener('click' , handleClickBtn);
-
+const subtractBet = () => {
+  const betNumber = parseInt(numberBetInput.value);
+  balance = balance - betNumber;
+  userBalance.innerHTML = balance;
+};
+const writeMessage = (msg) => {
+  messageElement.innerHTML = msg;
+};
+//EVENTOS
+const handleClickBtn = (event) => {
+  event.preventDefault();
+  const userNumber = parseInt(select.value);
+  const randomNumber = getRandomNumber(6);
+  if (userNumber === randomNumber) {
+    writeMessage('Has ganado el doble de lo apostado😃');
+    addBetNumber();
+  } else {
+    writeMessage('Has perdido lo apostado😢');
+    subtractBet();
+  }
+};
+btn.addEventListener('click', handleClickBtn);
