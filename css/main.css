@@ -9,13 +9,13 @@
     align-items: center;
    flex-direction: column;
    border: dotted 6px;
-   padding: 80px 0 120px 0;
 }
 .icondices{
     font-size: 6rem;
 }
 .textone{
 font-size: 8rem;
+margin: 30px;
 }
 .texttwo{
     font-size: 4rem;
